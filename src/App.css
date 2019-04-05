@@ -1,0 +1,128 @@
+.App {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-flex-direction {
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.app-grid-wrapper {
+  height: 100vh;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: minmax(0px, 1fr) minmax(300px, 5fr) minmax(0px, 1fr);
+  grid-template-rows: minmax(20px, 1fr) minmax(200px, 2fr) minmax(20px, 1fr);
+}
+
+.app-grid-wrapper2 {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(1fr, minmax(200px, 1fr));
+}
+
+.content {
+  padding: 120px;
+  /* border: 2px solid gray; */
+  box-shadow:rgba(0,0,0,.2) 0px 5px 15px;
+}
+
+.content-position {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.text-under-searchfield {
+  width: 100%;
+  margin-bottom: 5px;
+  color: rgba(66, 66, 66, 0.4);
+  transition: all .3s ease-in-out;
+}
+
+.searchField-wrapper {
+  width: 100%;
+  padding: 0px 0px;
+  border-bottom: 1px solid gray;
+  transition: all .3s ease-in-out;
+}
+
+.searchField {
+  width: 100%;
+  padding: 10px 10px 10px 0px;
+  margin: 10px;
+  min-width: 60px;
+  max-width: 1000px;
+  outline: none;
+  border: none;
+  /* padding: 20px; */
+}
+
+.test {
+  width: 0%;
+  border-bottom: 3px solid rgba(96, 64, 176, 1);
+  transition: all .3s ease-in-out;
+}
+
+.button-wrapper {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  border-radius: 15px;
+}
+
+
+
+.button {
+  width: 100%;
+  padding: 15px;
+  color: white;
+  border: 0px solid gray;
+  border-radius: 5px;
+  box-shadow:rgba(0,0,0,.2) 5px 5px 15px;
+}
+
+.button:disabled {
+  background-color: rgba(96, 64, 176, .3);
+  cursor: not-allowed;
+}
+
+.button:enabled {
+  background-color: rgba(96, 64, 176, 1);
+  cursor: pointer;
+}
+
+.Repo-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+
+  padding: 15px;
+  margin: 10px;
+  box-shadow:rgba(0,0,0,.2) 5px 5px 25px;
+  transition: all .3s ease-in-out;
+}
+
+.Repo-wrapper:hover {
+  box-shadow:rgba(0,0,0,.8) 0px 5px 15px, inset rgba(0,0,0,.15) 0px -10px 20px;
+  cursor: pointer;
+}
+
+.avatar {
+  max-width: 50px;
+  height: auto;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.link-to-repo {
+  text-decoration: none;
+}
