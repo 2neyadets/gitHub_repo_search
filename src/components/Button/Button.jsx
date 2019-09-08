@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Button = ({isDisabled, styleToButton, onClick}) => {
+const Button = ({isDisabled, onClick}) => {
+
     return (
         <div className="button-wrapper flex-center">
             <input
@@ -8,12 +10,16 @@ const Button = ({isDisabled, styleToButton, onClick}) => {
                 className="button"
                 type="button"
                 disabled={isDisabled}
-                style={styleToButton}
                 value="Найти репозитории"
                 onClick={onClick}
             />
         </div>
     );
-}
+};
+
+Button.propTypes = {
+    isDisabled: PropTypes.bool,
+    onClick: PropTypes.func,
+};
 
 export default Button;

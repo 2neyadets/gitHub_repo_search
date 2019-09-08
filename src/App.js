@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import SearchField from './components/SearchField/SearchField';
-import TextUnderSearchField from './components/TextUnderSearchField/TextUnderSearchField';
-import Button from './components/Button/Button';
-import Preloader from './components/Preloader/Preloader';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Preloader from './components/Preloader';
+import RepoList from './components/RepoList';
 
-import RepoList from './components/RepoList/RepoList';
+import api from './api/index'
 
 import './App.css';
+import SearchBlock from "./containers/SearchBlock";
 
 class App extends Component {
+
   constructor() {
-    super()
+    super();
     this.state = {
       lineState: "",
       textUnderSearchFieldState: "",
       progressBarState: "0%",
-      searchFieldValueState: "facebook",
+      searchFieldValueState: "",
       buttonIsDisabledState: true,
       preloaderState: false,
       dataFromGitLoadedState: false,
-      reposFromGitHubState: {
-        "items": [
+      reposFromGitHubState: [
           {
             "id": 0,
             "name": "",
@@ -29,27 +29,82 @@ class App extends Component {
             },
             "html_url": "",
           }
-        ]
-      },
-
+      ],
     }
   }
 
-  onSearchFieldClick = (event) => {
-    this.setState({ lineState: "1px solid rgba(96, 64, 176, 1)" });
-    this.setState({ textUnderSearchFieldState: "rgba(96, 64, 176, 1)" });
-    this.setState({ progressBarState: "100%" });
-  }
-  onSearchFieldBlurChange = (event) => {
-    this.setState({ lineState: "1px solid rgba(66, 66, 66, 0.4)" });
-    this.setState({ textUnderSearchFieldState: "rgba(66, 66, 66, 0.4)" });
-    this.setState({ progressBarState: "0%" });
+  render() {
+
+    const {
+      preloaderState,
+      dataFromGitLoadedState,
+      textUnderSearchFieldState,
+      lineState,
+      progressBarState,
+      buttonIsDisabledState,
+      reposFromGitHubState,
+      searchFieldValueState,
+    } = this.state;
+
+    return (
+      <div className="App">
+        <Router>
+          <Route path={'/'} exact={true} render={ () =>
+            <SearchBlock
+                textUnderSearchFieldState={textUnderSearchFieldState}
+                lineState={lineState}
+                progressBarState={progressBarState}
+                buttonIsDisabledState={buttonIsDisabledState}
+                handleSearchFieldBlurChange={this.handleSearchFieldBlurChange}
+                handleSearchFieldClick={this.handleSearchFieldClick}
+                handleSearchFieldValueChange={this.handleSearchFieldValueChange}
+                handleButtonClickChange={this.handleButtonClickChange}
+                defaultValueForSearch={searchFieldValueState}
+            />
+          }>
+          </Route>
+          <Route path={'/results'} exact={true} render={ () =>
+            (preloaderState || !dataFromGitLoadedState) ? (
+              <div className="app-grid-wrapper">
+                <div className="content-position flex-center column-flex-direction">
+                  <Preloader/>
+                </div>
+              </div>
+            ) : (
+              <div className="app-grid-wrapper2">
+                <RepoList
+                    repos={reposFromGitHubState}
+                    currentRequest={searchFieldValueState}
+                />
+              </div>
+            )
+          }>
+          </Route>
+        </Router>
+      </div>
+    );
+
   }
 
-  onSearchFieldValueChange = (event) => {
+  handleSearchFieldClick = (event) => {
+    this.setState({
+      lineState: "1px solid rgba(96, 64, 176, 1)",
+      textUnderSearchFieldState: "rgba(96, 64, 176, 1)",
+      progressBarState: "100%",
+    });
+  };
 
+  handleSearchFieldBlurChange = (event) => {
+    this.setState({
+      lineState: "1px solid rgba(66, 66, 66, 0.4)",
+      textUnderSearchFieldState: "rgba(66, 66, 66, 0.4)",
+      progressBarState: "0%",
+    });
+  };
+
+  handleSearchFieldValueChange = (event) => {
     if(event.key === "Enter") {
-      this.onButtonClickChange();
+      this.handleButtonClickChange();
     } else {
       this.setState({ searchFieldValueState: event.target.value });
       if (event.target.value) {
@@ -58,94 +113,19 @@ class App extends Component {
         this.setState({ buttonIsDisabledState: true });
       }
     }
+  };
 
-    
-  } 
-
-  onButtonClickChange = () => {
-    this.setState({ preloaderState: true });
-
-    
-
-    fetch(`https://api.github.com/search/repositories?q=${this.state.searchFieldValueState}`)
-      .then(response => response.json())
-      .then(items => {
-        this.setState({reposFromGitHubState: items});
-        return this.state.reposFromGitHubState.items[0].name;
+  handleButtonClickChange = async () => {
+    const {searchFieldValueState} = this.state;
+    this.setState({preloaderState: true});
+    const res = await api.repos.getRepos(searchFieldValueState);
+    if (res.status === 200 && res.data.items.length > 0) {
+      this.setState({
+        preloaderState: false,
+        reposFromGitHubState: res.data.items,
+        dataFromGitLoadedState: true
       })
-      .then(name => {
-        if(name) {
-          this.setState({dataFromGitLoadedState: true})
-          return this.state.dataFromGitLoadedState;
-        } else {
-          return false;
-        }
-      })
-      .then(isLoaded => {
-        if(isLoaded) {
-          this.setState({preloaderState: false});
-        }
-      })
-      .catch(err => console.log(err));
-
-}
-
-  render() {
-
-    const style1 = { borderBottom: this.state.lineState };
-    const style2 = { color: this.state.textUnderSearchFieldState };
-    const style3 = { width: this.state.progressBarState};
-
-    if(!this.state.preloaderState) {
-      if (!this.state.dataFromGitLoadedState) {
-        return (
-          <div className="App">
-            <div className="app-grid-wrapper">
-              <div className="content content-position flex-center column-flex-direction">
-                <TextUnderSearchField
-                styleToText={style2}
-                />
-                <SearchField 
-                className="" 
-                onBlurChange={this.onSearchFieldBlurChange}
-                focusChange={this.onSearchFieldClick}
-                onValueChange={this.onSearchFieldValueChange}
-                styleToSearchField={style1}
-                progressBar={style3}
-                />
-                <Button
-                isDisabled={this.state.buttonIsDisabledState}
-                onClick={this.onButtonClickChange}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      } else {
-        const gitHubRepos = this.state.reposFromGitHubState.items;
-        return (
-          <div className="App">
-            <div className="app-grid-wrapper2">
-              <RepoList
-                repos={gitHubRepos}
-                currentRequest={this.state.searchFieldValueState}
-              />
-            </div>
-          </div>
-        );
-      }
-    } else {
-      return (
-        <div className="App">
-          <div className="app-grid-wrapper">
-            <div className="content-position flex-center column-flex-direction">
-              <Preloader/>
-            </div>
-          </div>
-        </div>
-      );
     }
-    
   }
 }
 

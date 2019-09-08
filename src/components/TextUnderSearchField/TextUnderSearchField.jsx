@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TextUnderSearchField = ({styleToText}) => {
     return (
@@ -8,6 +9,10 @@ const TextUnderSearchField = ({styleToText}) => {
             </p>
         </div>
     );
-}
+};
+
+TextUnderSearchField.propTypes = {
+    styleToText: PropTypes.object,
+};
 
 export default TextUnderSearchField;
