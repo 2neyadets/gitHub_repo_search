@@ -5,7 +5,7 @@ const SearchField = ({onFocusChange, styleToSearchField, onValueChange, onBlurCh
     return (
         <div className="searchField-wrapper" style={styleToSearchField}>
             <input
-                onClick={onFocusChange}
+                onFocus={onFocusChange}
                 onBlur={onBlurChange}
                 onChange={onValueChange}
                 defaultValue={defaultValueForSearch}

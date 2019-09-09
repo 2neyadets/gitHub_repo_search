@@ -6,36 +6,38 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 const SearchBlock = ({
-                         textUnderSearchFieldState,
-                         lineState,
-                         progressBarState,
-                         buttonIsDisabledState,
-                         handleSearchFieldBlurChange,
-                         handleSearchFieldClick,
-                         handleSearchFieldValueChange,
-                         handleButtonClickChange,
-                         defaultValueForSearch
+                         isDisabledButton,
+                         defaultValueForSearch,
+
+                         handleButtonClick,
+                         handleSearchFieldFocus,
+                         handleSearchFieldBlur,
+                         handleSearchFieldChange,
+
+                         line,
+                         textUnderSearchFieldColor,
+                         progressBar,
 }) => {
 
     return (
         <div className="app-grid-wrapper">
             <div className="content content-position flex-center column-flex-direction">
                 <TextUnderSearchField
-                    styleToText={{ color: textUnderSearchFieldState }}
+                    styleToText={{ color: textUnderSearchFieldColor }}
                 />
                 <SearchField
                     className=""
-                    onBlurChange={handleSearchFieldBlurChange}
-                    onFocusChange={handleSearchFieldClick}
-                    onValueChange={handleSearchFieldValueChange}
+                    onBlurChange={handleSearchFieldBlur}
+                    onFocusChange={handleSearchFieldFocus}
+                    onValueChange={handleSearchFieldChange}
                     defaultValueForSearch={defaultValueForSearch}
-                    styleToSearchField={{ borderBottom: lineState }}
-                    progressBar={{ width: progressBarState}}
+                    styleToSearchField={{ borderBottom: line }}
+                    progressBar={{ width: progressBar}}
                 />
                 <Link to={'/results'} style={{textDecoration: 'none'}}>
                     <Button
-                        isDisabled={buttonIsDisabledState}
-                        onClick={handleButtonClickChange}
+                        isDisabled={isDisabledButton}
+                        onClick={handleButtonClick}
                     />
                 </Link>
             </div>
@@ -44,14 +46,14 @@ const SearchBlock = ({
 };
 
 SearchBlock.propTypes = {
-    textUnderSearchFieldState: PropTypes.string,
-    lineState: PropTypes.string,
-    progressBarState: PropTypes.string,
-    buttonIsDisabledState: PropTypes.bool,
-    handleSearchFieldBlurChange: PropTypes.func,
-    handleSearchFieldClick: PropTypes.func,
-    handleSearchFieldValueChange: PropTypes.func,
-    handleButtonClickChange: PropTypes.func,
+    textUnderSearchFieldColor: PropTypes.string,
+    line: PropTypes.string,
+    progressBar: PropTypes.string,
+    isDisabledButton: PropTypes.bool,
+    handleButtonClick: PropTypes.func,
+    handleSearchFieldFocus: PropTypes.func,
+    handleSearchFieldBlur: PropTypes.func,
+    handleSearchFieldChange: PropTypes.func,
     defaultValueForSearch: PropTypes.string,
 };
 
