@@ -9,8 +9,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {
-    changeSearchBlockReducer,
-    styleReducer,
+  changeSearchBlockReducer,
+  styleReducer,
 } from "./Redux/reducers"
 
 const rootReducer = combineReducers({ changeSearchBlockReducer, styleReducer });
@@ -18,11 +18,10 @@ const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
-    , document.getElementById('root'));
-
+  <Provider store={store}>
+      <App />
+  </Provider>
+  , document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

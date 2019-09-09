@@ -62,15 +62,15 @@ class App extends Component {
         <Router history={history}>
           <Route path={'/'} exact={true} render={ () =>
             <SearchBlock
-                isDisabledButton={isDisabledButton}
-                handleSearchFieldBlur={searchFieldBlur}
-                handleSearchFieldFocus={searchFieldFocus}
-                handleSearchFieldChange={searchFieldChange}
-                handleButtonClick={buttonClick}
-                defaultValueForSearch={searchFieldValue}
-                line={line}
-                textUnderSearchFieldColor={textUnderSearchFieldColor}
-                progressBar={progressBar}
+              isDisabledButton={isDisabledButton}
+              handleSearchFieldBlur={searchFieldBlur}
+              handleSearchFieldFocus={searchFieldFocus}
+              handleSearchFieldChange={searchFieldChange}
+              handleButtonClick={buttonClick}
+              defaultValueForSearch={searchFieldValue}
+              line={line}
+              textUnderSearchFieldColor={textUnderSearchFieldColor}
+              progressBar={progressBar}
             />
           }>
           </Route>

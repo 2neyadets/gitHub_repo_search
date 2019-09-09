@@ -11,15 +11,13 @@ instance.defaults.headers.post['Content-Type'] = 'application/json';
 // request interceptor
 instance.interceptors.request.use(
   conf => conf,
-  error => Promise.reject(error))
+  error => Promise.reject(error)
+);
 
 // response interceptor
 instance.interceptors.response.use(
   response => response,
-  error => {
-    const response = error.response;
-    return Promise.reject(response.data)
-  }
+  error => Promise.reject(error)
 );
 
 export default instance
