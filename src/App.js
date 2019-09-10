@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router history={history}>
-          <Route path={'/'} exact={true} render={ () =>
+          <Route path={process.env.PUBLIC_URL + '/'} exact={true} render={ () =>
             <SearchBlock
               isDisabledButton={isDisabledButton}
               handleSearchFieldBlur={searchFieldBlur}
@@ -74,7 +74,7 @@ class App extends Component {
             />
           }>
           </Route>
-          <Route path={'/results'} exact={true} render={ () =>
+          <Route path={process.env.PUBLIC_URL + '/results'} exact={true} render={ () =>
             (isShowPreloader || !isLoaded) ? (
               <div className="app-grid-wrapper">
                 <div className="content-position flex-center column-flex-direction">
