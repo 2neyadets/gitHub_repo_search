@@ -34,7 +34,7 @@ const SearchBlock = ({
           styleToSearchField={{ borderBottom: line }}
           progressBar={{ width: progressBar}}
         />
-        <Link to={'/results'} style={{textDecoration: 'none'}}>
+        <Link to={process.env.PUBLIC_URL + '/results'} style={{textDecoration: 'none'}}>
           <Button
             isDisabled={isDisabledButton}
             onClick={handleButtonClick}

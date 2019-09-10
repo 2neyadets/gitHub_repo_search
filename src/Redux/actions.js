@@ -21,7 +21,7 @@ export const buttonClickAction = (event) => (dispatch, getState) => {
 
 export const searchFieldChangeAction = (event) => {
   if(event.key === "Enter" && event.target.value) {
-    history.push('/results');
+    history.push(process.env.PUBLIC_URL + '/results');
     return buttonClickAction(event)
   } else {
     return {
