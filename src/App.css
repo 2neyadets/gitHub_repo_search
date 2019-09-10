@@ -35,7 +35,7 @@
 .content {
   padding: 120px;
   /* border: 2px solid gray; */
-  box-shadow:rgba(0,0,0,.2) 0px 5px 15px;
+  box-shadow:rgba(0,0,0,.2) 0 5px 15px;
 }
 
 .content-position {
@@ -51,15 +51,14 @@
 
 .searchField-wrapper {
   width: 100%;
-  padding: 0px 0px;
+  padding: 0;
   border-bottom: 1px solid gray;
   transition: all .3s ease-in-out;
 }
 
 .searchField {
   width: 100%;
-  padding: 10px 10px 10px 0px;
-  margin: 10px;
+  padding: 10px;
   min-width: 60px;
   max-width: 1000px;
   outline: none;
@@ -68,14 +67,14 @@
 }
 
 .test {
-  width: 0%;
+  width: 0;
   border-bottom: 3px solid rgba(96, 64, 176, 1);
   transition: all .3s ease-in-out;
 }
 
 .button-wrapper {
   width: 100%;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 0 0;
   border-radius: 15px;
 }
 
@@ -85,7 +84,7 @@
   width: 100%;
   padding: 15px;
   color: white;
-  border: 0px solid gray;
+  border: none;
   border-radius: 5px;
   box-shadow:rgba(0,0,0,.2) 5px 5px 15px;
 }
@@ -112,7 +111,7 @@
 }
 
 .Repo-wrapper:hover {
-  box-shadow:rgba(0,0,0,.8) 0px 5px 15px, inset rgba(0,0,0,.15) 0px -10px 20px;
+  box-shadow:rgba(0,0,0,.8) 0 5px 15px, inset rgba(0,0,0,.15) 0 -10px 20px;
   cursor: pointer;
 }
 
