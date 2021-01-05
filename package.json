@@ -4,7 +4,7 @@
   "private": true,
   "homepage" : "http://2neyadets.github.io/gitHub_repo_search",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "gh-pages": "^2.1.1",
     "history": "^4.9.0",
     "prop-types": "^15.7.2",
